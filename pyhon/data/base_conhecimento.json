@@ -1,0 +1,184 @@
+[
+  {
+    "id": 1,
+    "categoria": "Documentos",
+    "titulo": "Obter a Carteira de Trabalho Digital",
+    "palavras_chave": [
+      "carteira de trabalho",
+      "ctps digital",
+      "carteira digital",
+      "obter ctps"
+    ],
+    "resposta": "Acesse o serviço oficial pelo gov.br ou instale o aplicativo Carteira de Trabalho Digital. Entre com sua conta gov.br para consultar a carteira e seus vínculos de trabalho.",
+    "documentos": [
+      "CPF",
+      "Conta gov.br"
+    ],
+    "onde": "Site gov.br ou aplicativo Carteira de Trabalho Digital",
+    "fonte": "https://www.gov.br/pt-br/servicos/obter-a-carteira-de-trabalho",
+    "verificado_em": "2026-11-10"
+  },
+  {
+    "id": 2,
+    "categoria": "Documentos",
+    "titulo": "Fazer a inscrição no CPF",
+    "palavras_chave": [
+      "primeiro cpf",
+      "inscricao no cpf",
+      "tirar cpf",
+      "fazer cpf"
+    ],
+    "resposta": "A Receita Federal permite solicitar a inscrição no CPF pela internet. Siga o formulário oficial; conforme o caso, poderá ser necessário atendimento por outro canal.",
+    "documentos": [
+      "Documento de identificação e outros comprovantes solicitados para seu caso"
+    ],
+    "onde": "Serviço da Receita Federal no gov.br ou unidades de atendimento indicadas",
+    "fonte": "https://www.gov.br/pt-br/servicos/inscrever-no-cpf",
+    "verificado_em": "2026-11-10"
+  },
+  {
+    "id": 3,
+    "categoria": "Documentos",
+    "titulo": "Criar uma conta gov.br",
+    "palavras_chave": [
+      "criar conta gov",
+      "cadastro gov br",
+      "conta gov br",
+      "entrar no gov"
+    ],
+    "resposta": "Abra o serviço Criar sua conta GOV.BR, informe os dados solicitados diretamente no portal oficial e siga as instruções. O assistente não solicita seus dados.",
+    "documentos": [
+      "CPF para identificação no serviço oficial"
+    ],
+    "onde": "Site ou aplicativo gov.br",
+    "fonte": "https://www.gov.br/pt-br/servicos/criar-sua-conta-gov.br",
+    "verificado_em": "2026-11-10"
+  },
+  {
+    "id": 4,
+    "categoria": "Documentos",
+    "titulo": "Solicitar o primeiro título de eleitor",
+    "palavras_chave": [
+      "primeiro titulo",
+      "tirar titulo de eleitor",
+      "alistamento eleitoral",
+      "titulo eleitoral"
+    ],
+    "resposta": "Consulte o Autoatendimento Eleitoral do TSE, escolha a opção de primeiro título e siga as instruções. Consulte eventuais restrições de prazo eleitoral no site oficial.",
+    "documentos": [
+      "Documentos exigidos pelo Autoatendimento Eleitoral para sua situação"
+    ],
+    "onde": "Autoatendimento Eleitoral - Título Net ou cartório eleitoral",
+    "fonte": "https://www.tse.jus.br/servicos-eleitorais/titulo-eleitoral/autoatendimento-eleitoral",
+    "verificado_em": "2026-11-10"
+  },
+  {
+    "id": 5,
+    "categoria": "Documentos",
+    "titulo": "Consultar a situação cadastral do CPF",
+    "palavras_chave": [
+      "cpf regular",
+      "situacao do cpf",
+      "consultar cpf",
+      "comprovante cpf"
+    ],
+    "resposta": "Acesse o serviço da Receita Federal para consultar a situação cadastral do CPF e emitir o comprovante correspondente. Preencha seus dados apenas no site oficial.",
+    "documentos": [
+      "Dados de identificação solicitados no serviço oficial"
+    ],
+    "onde": "Serviço de consulta de CPF da Receita Federal",
+    "fonte": "https://www.gov.br/pt-br/servicos/consultar-cadastro-de-pessoas-fisicas",
+    "verificado_em": "2026-11-10"
+  },
+  {
+    "id": 6,
+    "categoria": "Documentos",
+    "titulo": "Emitir a certidão de quitação eleitoral",
+    "palavras_chave": [
+      "quitacao eleitoral",
+      "certidao eleitoral",
+      "certidao de quitacao",
+      "nada consta eleitoral"
+    ],
+    "resposta": "O TSE permite emitir a certidão de quitação eleitoral pelo Autoatendimento Eleitoral ou pelo aplicativo e-Título, desde que a situação do eleitor permita a emissão.",
+    "documentos": [
+      "Dados de identificação exigidos pelo TSE"
+    ],
+    "onde": "Autoatendimento Eleitoral do TSE ou aplicativo e-Título",
+    "fonte": "https://www.tse.jus.br/servicos-eleitorais/certidoes",
+    "verificado_em": "2026-11-10"
+  },
+  {
+    "id": 7,
+    "categoria": "Emprego",
+    "titulo": "Buscar vagas de emprego pelo SINE",
+    "palavras_chave": [
+      "vagas de emprego",
+      "buscar emprego",
+      "sine",
+      "procurar vaga"
+    ],
+    "resposta": "O SINE oferece busca de oportunidades de trabalho pela internet e por postos presenciais. Consulte vagas compatíveis com seu perfil no Portal Emprega Brasil ou no aplicativo Carteira de Trabalho Digital.",
+    "documentos": [
+      "Dados de cadastro, formação e experiência profissional, conforme solicitado no serviço"
+    ],
+    "onde": "Portal Emprega Brasil, Carteira de Trabalho Digital ou postos SINE",
+    "fonte": "https://www.gov.br/pt-br/servicos/buscar-emprego-no-sistema-nacional-de-emprego-sine",
+    "verificado_em": "2026-11-10"
+  },
+  {
+    "id": 8,
+    "categoria": "Emprego",
+    "titulo": "Acessar o Portal Emprega Brasil",
+    "palavras_chave": [
+      "portal emprega brasil",
+      "emprega brasil",
+      "servicos ao trabalhador",
+      "buscar trabalho"
+    ],
+    "resposta": "O Portal Emprega Brasil reúne serviços digitais ao trabalhador, incluindo consulta à carteira de trabalho, vagas de emprego, seguro-desemprego e abono salarial.",
+    "documentos": [
+      "Conta gov.br"
+    ],
+    "onde": "Portal Emprega Brasil - Trabalhador",
+    "fonte": "https://www.gov.br/pt-br/servicos/acessar-portal-emprega-brasil-2013-trabalhador",
+    "verificado_em": "2026-11-10"
+  },
+  {
+    "id": 9,
+    "categoria": "Benefícios",
+    "titulo": "Solicitar o seguro-desemprego",
+    "palavras_chave": [
+      "seguro desemprego",
+      "pedir seguro",
+      "requerimento desemprego",
+      "solicitar seguro desemprego"
+    ],
+    "resposta": "Se você foi dispensado sem justa causa, consulte os critérios oficiais e solicite o seguro-desemprego pelo gov.br ou pelo aplicativo Carteira de Trabalho Digital. O pedido depende da análise dos requisitos legais.",
+    "documentos": [
+      "CPF",
+      "Requerimento do Seguro-Desemprego fornecido pelo empregador"
+    ],
+    "onde": "Serviço oficial no gov.br ou aplicativo Carteira de Trabalho Digital",
+    "fonte": "https://www.gov.br/pt-br/servicos/solicitar-o-seguro-desemprego",
+    "verificado_em": "2026-11-10"
+  },
+  {
+    "id": 10,
+    "categoria": "Benefícios",
+    "titulo": "Consultar o abono salarial",
+    "palavras_chave": [
+      "abono salarial",
+      "pis pasep",
+      "consulta abono",
+      "receber abono"
+    ],
+    "resposta": "Consulte as informações sobre o abono salarial no aplicativo Carteira de Trabalho Digital ou no portal gov.br. O recebimento depende dos requisitos legais e do calendário oficial.",
+    "documentos": [
+      "Conta gov.br para consulta digital"
+    ],
+    "onde": "Carteira de Trabalho Digital ou portal gov.br",
+    "fonte": "https://www.gov.br/trabalho-e-emprego/pt-br/servicos/mte/obter-o-abono-salarial",
+    "verificado_em": "2026-11-10"
+  }
+]
