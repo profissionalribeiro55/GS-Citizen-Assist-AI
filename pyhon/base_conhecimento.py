@@ -24,7 +24,7 @@ class BaseConhecimento:
         self.caminho = Path(caminho)
         self.orientacoes = []
 
-    def carregar(self):
+    def carregar(self, registros_adicionais=None):
         try:
             with self.caminho.open("r", encoding="utf-8") as arquivo:
                 registros = json.load(arquivo)
@@ -35,6 +35,8 @@ class BaseConhecimento:
             self.orientacoes = []
             return False
 
+        # Módulos complementares usam a mesma validação, busca e categorias.
+        registros = registros + list(registros_adicionais or [])
         self.orientacoes = []
         ids_vistos = set()
         for indice, dados in enumerate(registros, 1):

@@ -10,13 +10,13 @@ from pathlib import Path
 class Assistente:
     CAMPOS_CSV = (
         "data", "origem", "pergunta", "id_orientacao", "encontrou",
-        "ajudou", "tentativas", "tempo_segundos", "facilidade"
+        "ajudou", "tentativas", "tempo_segundos", "facilidade", "detalhes"
     )
 
-    def __init__(self, nome, base):
+    def __init__(self, nome, base, pasta_dados=None):
         self.nome = nome
         self.base = base
-        self.pasta_dados = Path(__file__).resolve().parent / "data"
+        self.pasta_dados = Path(pasta_dados) if pasta_dados is not None else Path(__file__).resolve().parent / "data"
         self.pasta_dados.mkdir(parents=True, exist_ok=True)
         self.caminho_historico = self.pasta_dados / "historico.json"
         self.caminho_csv = self.pasta_dados / "atendimentos.csv"
@@ -65,7 +65,7 @@ class Assistente:
         except OSError as erro:
             print(f"Erro ao salvar histórico: {erro}")
 
-    def registrar(self, origem, pergunta, orientacao, encontrou, ajudou, tentativas, inicio):
+    def registrar(self, origem, pergunta, orientacao, encontrou, ajudou, tentativas, inicio, detalhes=None):
         if self.contem_dados_pessoais(pergunta):
             print("Atendimento com dados pessoais recusado e NÃO registrado.")
             return
@@ -81,6 +81,8 @@ class Assistente:
             "tempo_segundos": round(time.time() - inicio, 1),
             "facilidade": None,
         }
+        if detalhes is not None:
+            registro["detalhes"] = detalhes
         self.historico.append(registro)
         self.registros_sessao.append(registro)
         self._salvar_historico()
@@ -196,7 +198,10 @@ class Assistente:
             with self.caminho_csv.open("w", encoding="utf-8-sig", newline="") as arquivo:
                 escritor = csv.DictWriter(arquivo, fieldnames=self.CAMPOS_CSV, extrasaction="ignore")
                 escritor.writeheader()
-                escritor.writerows(self.historico)
+                for registro in self.historico:
+                    linha = dict(registro)
+                    linha["detalhes"] = json.dumps(registro["detalhes"], ensure_ascii=False) if "detalhes" in registro else ""
+                    escritor.writerow(linha)
             print(f"CSV exportado: {self.caminho_csv}")
         except OSError as erro:
             print(f"Erro ao exportar CSV: {erro}")

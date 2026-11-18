@@ -1,1 +1,13 @@
-[]
+[
+  {
+    "data": "2026-11-18T17:12:47",
+    "origem": "pergunta",
+    "pergunta": "como tirar cpf",
+    "id_orientacao": 2,
+    "encontrou": true,
+    "ajudou": true,
+    "tentativas": 1,
+    "tempo_segundos": 14.3,
+    "facilidade": null
+  }
+]

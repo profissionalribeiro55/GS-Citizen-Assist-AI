@@ -1,0 +1,77 @@
+{
+  "versao": "1.0",
+  "data_referencia": "2026-11-17",
+  "publico": "Famílias atendidas pelo Citizen Assist AI que querem reduzir despesas com iluminação residencial.",
+  "necessidade": "Iluminar os mesmos cinco pontos, com fluxo luminoso equivalente, pelo mesmo tempo, inclusive à noite.",
+  "origem": "Cenário didático estimado pela equipe para comparar alternativas. Não é medição de uma residência, cotação comercial nem tarifa oficial. Os conceitos são fundamentados nas referências; todos os números abaixo são hipóteses substituíveis.",
+  "parametros": {
+    "quantidade": 5,
+    "potencia_atual_w": 60,
+    "potencia_led_w": 9,
+    "fluxo_atual_lm": 800,
+    "fluxo_led_lm": 800,
+    "horas_dia": 5,
+    "dias_mes": 30,
+    "meses": 12,
+    "tarifa_kwh": 1.0,
+    "preco_led": 15.0,
+    "custo_solar": 2500.0,
+    "manutencao_solar_ano": 100.0,
+    "potencia_solar_kwp": 0.1,
+    "hsp": 4.5,
+    "rendimento_solar": 0.75,
+    "bateria_util_kwh": 0.30,
+    "disponibilidade_solar": 0.80
+  },
+  "premissas": {
+    "quantidade": "5 pontos de luz ilustram uma residência pequena; não representam média populacional.",
+    "potencia_atual_w": "60 W: referência didática de lâmpada antiga já existente, sem recomendar compra dessa tecnologia.",
+    "potencia_led_w": "9 W: hipótese de LED. Conferir potência e fluxo na etiqueta do produto escolhido.",
+    "fluxo_atual_lm": "800 lm por ponto: serviço luminoso assumido, a verificar em etiqueta/medição.",
+    "fluxo_led_lm": "800 lm por ponto: equivalência assumida; distribuição, cor e iluminância precisam ser verificadas no ambiente.",
+    "horas_dia": "5 h/dia: hipótese de uso noturno constante, ajustável no assistente.",
+    "dias_mes": "Mês de referência de 30 dias, igual para todas as alternativas.",
+    "meses": "12 meses idênticos de referência (360 dias), não previsão sazonal nem ano civil.",
+    "tarifa_kwh": "R$ 1,00/kWh: preço marginal hipotético, sem cobrança fixa. Substituir pelo custo aplicável; não dividir cegamente a conta total pelo consumo.",
+    "preco_led": "R$ 15 por lâmpada: hipótese de orçamento, sem pesquisa de preços. Instalação em soquetes compatíveis já existentes.",
+    "custo_solar": "R$ 2.500 adicionais às LEDs: orçamento hipotético de painel, bateria, controlador, conversão, proteções, instalação e transferência segura entre fontes. Exige cotação técnica.",
+    "manutencao_solar_ano": "R$ 100 por 12 meses: provisão didática. Não inclui futura substituição da bateria.",
+    "potencia_solar_kwp": "0,10 kWp: sistema ilustrativo dedicado à iluminação; não representa dimensionamento executivo.",
+    "hsp": "4,5 horas de sol pleno por dia: hipótese, não dado medido de uma cidade. Substituir por dados locais e sazonais do SunData.",
+    "rendimento_solar": "75%: fator global estimado após perdas de temperatura, conversão e armazenamento; não aplicar novamente perdas na bateria útil.",
+    "bateria_util_kwh": "0,30 kWh úteis entregáveis à carga por ciclo diário, já após limites de descarga e perdas. Não é capacidade nominal.",
+    "disponibilidade_solar": "80%: hipótese adicional de atendimento do limite diário devido à variabilidade e indisponibilidade. Não é eficiência de conversão, dado climático ou garantia; testar também 0% e 100%."
+  },
+  "referencias": [
+    {
+      "titulo": "Centro Paula Souza — Entenda os conceitos: Energia",
+      "url": "https://pets.cps.sp.gov.br/entenda-os-conceitos-energia/",
+      "uso": "Conceitos de potência, energia e E = P × t; não fornece os preços ou hábitos usados no cenário.",
+      "acesso": "2026-11-17"
+    },
+    {
+      "titulo": "Inmetro — Eficiência de lâmpadas e luminárias",
+      "url": "https://www.gov.br/inmetro/pt-br/acesso-a-informacao/perguntas-frequentes/avaliacao-da-conformidade/lampadas-e-luminarias-led-portaria-inmetro-no-231-2026-consumidores/para-pagar-uma-conta-de-energia-mais-barata-devo-comprar-lampadas-e-luminarias-de-luz-201cfria201d",
+      "uso": "Comparar fluxo luminoso e eficácia em lm/W; temperatura de cor não determina eficiência.",
+      "acesso": "2026-11-17"
+    },
+    {
+      "titulo": "CEPEL/CRESESB — SunData",
+      "url": "https://www.cresesb.cepel.br/?section=sundata",
+      "uso": "Obter irradiação local e mensal antes de um projeto real; 4,5 HSP é hipótese nossa. Conteúdo localizado em busca; acesso direto apresentou indisponibilidade.",
+      "acesso": "2026-11-17"
+    },
+    {
+      "titulo": "CEPEL/CRESESB — Casa Solar Eficiente",
+      "url": "https://cresesb.cepel.br/index.php?catid=91&lang=pt&section=com_content",
+      "uso": "Papel de baterias e controladores para iluminação noturna. Conteúdo localizado em busca; acesso direto apresentou indisponibilidade.",
+      "acesso": "2026-11-17"
+    },
+    {
+      "titulo": "EPE — Energia Renovável (2016)",
+      "url": "https://www.epe.gov.br/sites-pt/publicacoes-dados-abertos/publicacoes/PublicacoesArquivos/publicacao-172/Energia%20Renov%C3%A1vel%20-%20Online%2016maio2016.pdf",
+      "uso": "Impactos da fabricação de componentes fotovoltaicos e necessidade de gestão de resíduos; não sustenta emissão zero no ciclo de vida.",
+      "acesso": "2026-11-17"
+    }
+  ]
+}

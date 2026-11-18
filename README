@@ -1,0 +1,105 @@
+# Citizen Assist AI — Python, SERS e computer science
+
+# RM e integrantes:
+
+Enzo Ribeiro RM: 569429
+Gabriel de Paula Santos RM: 573195
+Joao Lucas Silva Lopes RM: 573875
+
+Programa de terminal que apresenta orientações sobre serviços públicos brasileiros. O usuário pode fazer uma pergunta, procurar por categoria, consultar indicadores dos atendimentos e exportar os registros para CSV. É um protótipo acadêmico: **não é um canal oficial**, não faz solicitações em nome do usuário e não garante direitos ou benefícios.
+
+O programa usa uma base local com 10 orientações nas categorias **Benefícios**, **Documentos** e **Emprego**, mais 3 orientações calculadas pelo módulo **Energia e sustentabilidade (SERS)**. A busca é baseada em regras e palavras-chave; não consulta uma IA ou serviço externo em tempo real. As respostas de serviços vêm do JSON, e as de energia são geradas a partir do cenário documentado, com referências e limitações.
+
+A contribuição de energia, identificação dos integrantes a preencher, análise, testes e roteiro de entrega estão em [SERS/README.md](SERS/README.md).
+
+## Requisitos e como iniciar
+
+- Python 3 instalado e acessível pelo terminal. Não há bibliotecas externas: o projeto usa apenas a biblioteca padrão.
+- As pastas `pyhon` e `SERS` devem permanecer juntas na raiz do projeto, com suas subpastas de dados. O nome da pasta é literalmente `pyhon` e o módulo `orientação.py` contém acentos no nome.
+
+No **PowerShell**, abra o terminal na pasta principal do projeto e execute:
+
+```powershell
+cd .\pyhon
+python main.py
+```
+
+Se o Windows reconhecer o iniciador `py` em vez de `python`, use `py main.py`. No VS Code, abra a pasta do projeto, selecione um interpretador Python e rode os mesmos comandos no terminal integrado. Não é necessário instalar pacotes com `pip` nem configurar chaves de API. O programa usa caminhos calculados a partir de `main.py`, então também pode ser iniciado da raiz com `python .\pyhon\main.py`.
+
+## Como usar o programa
+
+O menu principal aceita os números abaixo e retorna após cada operação:
+
+| Opção | Ação | Resultado |
+| --- | --- | --- |
+| `1` | Fazer uma pergunta | Digite a dúvida, leia a orientação encontrada e responda `s` ou `n` sobre sua utilidade. Digite `0` no campo da pergunta para voltar. |
+| `2` | Navegar por categorias | Escolha uma categoria, depois uma orientação, leia os detalhes e responda `s` ou `n`. Use `0` para voltar em cada nível. |
+| `3` | Ver indicadores | Exibe quantidade de atendimentos, resposta encontrada, taxa de respostas úteis, tempo e tentativas médios, facilidade média e dúvidas sem solução. |
+| `4` | Exportar atendimentos | Atualiza `pyhon/data/atendimentos.csv` com todos os registros do histórico. |
+| `5` | Comparar alternativas de energia | Ajuste quantidade de lâmpadas, horas de uso e tarifa; compare LED e solar com bateria, leia referências e avalie a compreensão. Enter mantém o exemplo e `v` volta. |
+| `0` | Sair | Pede uma nota de facilidade de `1` a `5`, salva essa nota nos atendimentos da sessão e exporta o CSV automaticamente. |
+
+Para uma demonstração, pergunte **`como tirar cpf`**. A orientação exibirá explicação, documentos ou requisitos, local de atendimento, URL da fonte e data de verificação. Se nenhuma orientação atingir o mínimo de pontos, tente outra expressão ou navegue pelas categorias. Uma dúvida sem resposta é registrada quando você digita `0` após uma ou mais tentativas sem resultado; voltar imediatamente não gera registro.
+
+**Privacidade:** não digite dados reais de pessoas. Perguntas com `@` ou pelo menos oito algarismos são recusadas antes da busca e não são registradas. Essa é uma regra simples do protótipo e não detecta todos os tipos de informação pessoal; a própria resposta pode mencionar documentos como CPF, mas o programa não pede que o número seja informado. Também não guarda a avaliação quando o processo é encerrado à força antes da opção `0`.
+
+## Como o código funciona
+
+| Arquivo | Responsabilidade |
+| --- | --- |
+| `pyhon/main.py` | Cria a base e o assistente; mostra os avisos e o menu; direciona cada opção. |
+| `pyhon/orientação.py` | Classe `Orientacao`: verifica os campos de cada entrada da base e imprime o conteúdo da orientação. |
+| `pyhon/base_conhecimento.py` | Classe `BaseConhecimento`: carrega e valida o JSON, separa categorias e pontua os resultados da busca. |
+| `pyhon/assistente.py` | Classe `Assistente`: conduz as perguntas e a navegação, valida entradas, grava o histórico, calcula indicadores e exporta CSV. |
+| `pyhon/data/base_conhecimento.json` | Base editável de orientações, com categoria, título, palavras-chave, resposta, documentos, local, fonte e data de verificação. |
+| `pyhon/data/historico.json` | Registros persistidos entre execuções. Começa como `[]` e é atualizado após cada atendimento aceito. |
+| `pyhon/data/atendimentos.csv` | Relatório gerado ou sobrescrito quando a opção `4` é escolhida ou na saída normal. |
+| `SERS/energia.py` e `SERS/dados/cenario.json` | Cálculos de iluminação, hipóteses, referências e orientações integradas à base. |
+| `SERS/interface.py` | Simulação de energia e avaliação registradas no mesmo histórico. |
+
+Na inicialização, o módulo SERS valida seu cenário e gera três orientações com os resultados dos cálculos. `BaseConhecimento.carregar()` reúne essas entradas com a lista no JSON, cria objetos `Orientacao` e ignora entradas inválidas ou com ID repetido. Depois, `Assistente` lê `historico.json` e o menu começa. Um cenário SERS ausente ou inválido gera aviso e mantém os serviços originais disponíveis.
+
+Na busca, `normalizar()` converte texto para minúsculas, remove acentos e pontuação e separa palavras. Cada frase de `palavras_chave` encontrada na pergunta soma **3 pontos**; cada palavra de quatro ou mais letras presente também no título soma **1 ponto**. Os resultados são ordenados pela pontuação. O primeiro é apresentado somente se tiver pelo menos **3 pontos**; a tela chama a pontuação de 3 a 5 de confiança **MÉDIA** e de 6 ou mais de **ALTA**. Esses rótulos são uma heurística do programa, **não probabilidades nem uma medição estatística de precisão**. Até duas orientações relacionadas também podem ser listadas.
+
+Após a resposta, `registrar()` adiciona ao histórico a pergunta, a origem (`pergunta`, `categoria` ou `energia`), o ID da orientação, se foi encontrada, se ajudou, tentativas e duração. A simulação acrescenta `detalhes` com parâmetros, resultados, referências e avaliação, exportados como JSON na última coluna do CSV; históricos antigos continuam compatíveis. Na saída normal, `finalizar()` aplica a nota de facilidade a **todos os atendimentos feitos nesta execução** e exporta o CSV. Os indicadores usam todo o histórico salvo, inclusive execuções anteriores; antes de sair, os registros da sessão ainda não têm nota de facilidade. A opção `4` exporta a versão atual naquele momento.
+
+## Dados para apresentação
+
+O histórico e o CSV são arquivos de dados do próprio programa. Uma execução de demonstração pode adicionar registros e alterar os indicadores de apresentações seguintes. Se quiser começar uma apresentação vazia, faça antes uma cópia dos arquivos e, com o programa fechado, coloque `[]` em `pyhon/data/historico.json` e deixe `pyhon/data/atendimentos.csv` vazio. Restaure os arquivos copiados depois. Não altere a base de conhecimento apenas para zerar os indicadores.
+
+
+## SERS — como funciona a aplicação de energia
+
+O módulo SERS ajuda famílias a comparar alternativas para iluminar os mesmos ambientes: manter as lâmpadas atuais, substituí-las por LED ou usar LED com energia solar e bateria. A comparação considera consumo, investimento, manutenção e custo total dos primeiros 12 meses. Os valores iniciais são estimativas didáticas e aparecem acompanhados de fontes e limitações.
+
+### Passo a passo para usar
+
+1. Na raiz do projeto, execute `python .\pyhon\main.py`.
+2. Escolha **5 — Comparar alternativas de energia (SERS)**.
+3. Informe quantidade de lâmpadas, horas de uso por dia e custo variável da energia em R$/kWh. Pressione Enter para manter cada valor inicial ou `v` para cancelar. Decimais podem usar vírgula ou ponto.
+4. O programa calcula e mostra as três situações, indicando o consumo das lâmpadas, a energia comprada da rede, o custo mensal, o investimento, a manutenção e o total em 12 meses.
+5. Leia a recomendação e as limitações. Responda se a comparação ajudou, se ficou claro que são estimativas e escolha um comentário opcional.
+6. Use **3** para consultar os indicadores e **4** para exportar o histórico em CSV. Ao sair com **0**, informe a nota de facilidade de uso.
+
+### Exemplo inicial e interpretação
+
+O exemplo considera cinco lâmpadas, cinco horas diárias e meses de 30 dias. As lâmpadas atuais têm 60 W e as LEDs, 9 W, com fluxo luminoso equivalente assumido. O custo variável hipotético é R$ 1,00/kWh.
+
+| Resultado | Situação atual | LED na rede | LED + solar com bateria |
+| --- | ---: | ---: | ---: |
+| Consumo das lâmpadas por mês | 45,00 kWh | 6,75 kWh | 6,75 kWh |
+| Energia comprada da rede por mês | 45,00 kWh | 6,75 kWh | 1,35 kWh |
+| Custo total dos primeiros 12 meses, com investimento e manutenção considerados | R$ 540,00 | R$ 156,00 | R$ 2.691,20 |
+
+Nesse exemplo, LED na rede apresenta o menor custo no primeiro período de 12 meses. O solar reduz mais a compra de energia da rede, mas exige maior investimento. Os valores se referem à iluminação selecionada; a conta completa da residência inclui outros consumos e cobranças.
+
+### Cálculos e integração com o assistente
+
+O consumo é calculado por `quantidade × potência em watts × horas por dia × dias ÷ 1000`. A geração solar depende da potência do painel, das horas de sol pleno e do rendimento assumido. Como o uso considerado é noturno, o aproveitamento solar também é limitado pela bateria e pela disponibilidade estimada. A rede supre a parcela restante.
+
+Na **opção 1**, perguntas como `conta de luz`, `lampadas led` e `energia solar` exibem orientações com os resultados do cenário inicial. Na **opção 2**, as mesmas orientações aparecem em **Energia e sustentabilidade**. A busca usa palavras-chave locais. Alterações feitas na opção 5 valem apenas para aquele atendimento; não mudam as respostas do cenário inicial.
+
+`SERS/dados/cenario.json` contém os parâmetros, as premissas e as referências. `SERS/energia.py` valida os dados e realiza os cálculos. `SERS/interface.py` conduz a simulação e envia os resultados e a avaliação ao histórico comum em `pyhon/data/historico.json`. A exportação para `pyhon/data/atendimentos.csv` inclui esses dados na coluna `detalhes`, em formato JSON.
+
+Para adaptar potências, fluxo luminoso, preços, painel ou bateria, atualize o cenário e suas justificativas e reinicie o programa. A comparação deve manter iluminação equivalente. Estimativas de economia e geração dependem das condições reais; orçamento, dados climáticos locais e avaliação técnica são necessários antes de uma instalação.
+

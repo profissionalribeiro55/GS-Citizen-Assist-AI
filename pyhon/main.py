@@ -1,6 +1,13 @@
 """Ponto de entrada: execute com python main.py"""
 
 from pathlib import Path
+import sys
+
+# Permite iniciar tanto da raiz quanto de dentro de pyhon, sem instalar pacotes.
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
+from SERS.energia import ModuloEnergia
+from SERS.interface import atender_energia
 
 from assistente import Assistente
 from base_conhecimento import BaseConhecimento
@@ -9,7 +16,14 @@ from base_conhecimento import BaseConhecimento
 def main():
     raiz = Path(__file__).resolve().parent
     base = BaseConhecimento(raiz / "data" / "base_conhecimento.json")
-    base.carregar()
+    energia = None
+    orientacoes_energia = []
+    try:
+        energia = ModuloEnergia()
+        orientacoes_energia = energia.orientacoes()
+    except (OSError, ValueError) as erro:
+        print(f"Aviso: módulo SERS indisponível ({erro}). Revise SERS/dados/cenario.json.")
+    base.carregar(registros_adicionais=orientacoes_energia)
     assistente = Assistente("Citizen Assist AI", base)
 
     print("\nBem-vindo ao Citizen Assist AI!")
@@ -22,6 +36,7 @@ def main():
         print("[2] Navegar por categorias")
         print("[3] Ver indicadores")
         print("[4] Exportar atendimentos para CSV")
+        print("[5] Comparar alternativas de energia (SERS)")
         print("[0] Sair")
         opcao = input("Escolha uma opção: ").strip()
 
@@ -33,6 +48,11 @@ def main():
             assistente.indicadores()
         elif opcao == "4":
             assistente.exportar_csv()
+        elif opcao == "5":
+            if energia is None:
+                print("SERS indisponível. Corrija o cenário e reinicie o programa.")
+            else:
+                atender_energia(assistente, energia)
         elif opcao == "0":
             assistente.finalizar()
             break
@@ -45,6 +65,3 @@ if __name__ == "__main__":
         main()
     except (KeyboardInterrupt, EOFError):
         print("\nPrograma interrompido pelo usuário.")
-
-
-        
