@@ -10,7 +10,6 @@ Programa de terminal que apresenta orientações sobre serviços públicos brasi
 
 O programa usa uma base local com 10 orientações nas categorias **Benefícios**, **Documentos** e **Emprego**, mais 3 orientações calculadas pelo módulo **Energia e sustentabilidade (SERS)**. A busca é baseada em regras e palavras-chave; não consulta uma IA ou serviço externo em tempo real. As respostas de serviços vêm do JSON, e as de energia são geradas a partir do cenário documentado, com referências e limitações.
 
-A contribuição de energia, identificação dos integrantes a preencher, análise, testes e roteiro de entrega estão em [SERS/README.md](SERS/README.md).
 
 ## Requisitos e como iniciar
 
